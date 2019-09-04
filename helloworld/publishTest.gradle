@@ -1,0 +1,24 @@
+apply plugin: 'maven-publish'
+
+task sourcesJar(type: Jar) doLast {
+  classifier = 'sources'
+  from android.sourceSets.main.java.srcDirs
+}
+
+publishing {
+  publications {
+    mavenPublish(MavenPublication) {
+      artifactId "helloworldlib"
+      groupId "work.kcpoipoi"
+      version "0.0.1"
+
+      artifact sourcesJar
+      artifact "$buildDir/outputs/aar/helloworld-release.aar"
+    }
+  }
+  repositories {
+    maven {
+      url "$buildDir/repo"
+    }
+  }
+}
