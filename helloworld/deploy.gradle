@@ -29,7 +29,8 @@ task sourcesJar(type: Jar) {
 }
 
 task javadocJar(type: Jar, dependsOn: dokka) {
-
+  classifier = 'javadoc'
+  from "$buildDir/javadoc"
 }
 
 def pomConfig = {
