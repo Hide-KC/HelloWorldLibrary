@@ -13,6 +13,7 @@ ext {
   devMail = 'kcs.dev.labo@gmail.com'
   licenseName = 'MIT'
   licenseUrl = 'https://opensource.org/licenses/mit-license.php'
+  siteUrl = 'https://github.com/Hide-KC/HelloWorldLibrary'
 }
 
 // This is the library version used when deploying the artifact
@@ -49,7 +50,7 @@ def pomConfig = {
     }
   }
   scm {
-    url "https://github.com/Hide-KC/HelloWorldLibrary"
+    url siteUrl
   }
 }
 
@@ -77,10 +78,10 @@ project.afterEvaluate {
           def root = asNode()
           root.appendNode('description', libDescription)
           root.appendNode('name', libName)
-          root.appendNode('url', 'https://github.com/Hide-KC/HelloWorldLibrary')
+          root.appendNode('url', siteUrl)
           root.children().last() + pomConfig
 
-          def dependenciesNode = asNode().getAt('dependencies')[0] ?: asNode().appendNode('dependencies')
+          def dependenciesNode = root['dependencies'][0] ?: root.appendNode('dependencies')
           configurations.implementation.allDependencies.each {
             // Ensure dependencies such as fileTree are not included.
             if (it.name != 'unspecified') {
@@ -114,9 +115,9 @@ bintray {
     desc = libDescription
     publish = true
     override = true
-    userOrg = devId
+    userOrg = user
     licenses = [licenseName]
-    vcsUrl = 'https://github.com/Hide-KC/HelloWorldLibrary.git'
+    vcsUrl = siteUrl + '.git'
     version {
       name = libVersion
     }
