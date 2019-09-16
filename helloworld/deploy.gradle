@@ -120,8 +120,3 @@ bintray {
     }
   }
 }
-
-artifacts {
-  archives sourcesJar
-  archives javadocJar
-}
